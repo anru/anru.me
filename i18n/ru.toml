@@ -1,0 +1,6 @@
+[wordCount]
+  zero = "Без слов"
+  one = "{{ .Count }} слово"
+  few = "{{ .Count }} слова"
+  many = "{{ .Count }} слов"
+  other = "{{ .Count }} слово"

@@ -1,0 +1,7 @@
+
+{{ $hash := .Get "hash" | default (slicestr (trim (.Inner | plainify ) "\n ") 0 10 | base64Encode) }}
+
+<div class="p {{ if .Get "class" }}{{ .Get "class" }}{{ end }}" id="{{- $hash -}}">
+  {{ .Inner | safeHTML }}
+  <a class="permalink" href="#{{- $hash -}}">#</a>
+</div>

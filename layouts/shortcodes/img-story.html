@@ -1,0 +1,12 @@
+<figure{{ if .Get "class" }} class="{{ .Get "class" }}"{{ end }}>
+<img src="{{ .Get "src" }}" alt="{{ .Get "alt" | default (.Get "caption") }}">
+
+<figcaption>
+  {{ if .Get "href" }}
+  <a href="{{ .Get "href" }}" target="_blank">{{ .Inner | safeHTML }}</a>
+  {{ else }}
+  {{ .Inner | safeHTML }}
+  {{ end }}
+</figcaption>
+
+</figure>

@@ -1,0 +1,6 @@
+
+{{ $dt := .Lastmod }}
+
+<time datetime="{{ $dt.Format "2006-01-02T15:04:05JST" }}">
+{{ $dt.Day }} {{ index .Site.Data.rudate.months (add $dt.Month -1) }} {{ $dt.Year }}
+</time>

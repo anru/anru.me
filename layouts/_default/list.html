@@ -1,0 +1,16 @@
+{{ define "title" }}{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ end }}
+
+{{ define "main" }}
+<div class="l-container">
+
+      <div class="articles">
+        <div class="mrow">
+          {{ range (.Paginate .Data.Pages).Pages }}
+          {{ .Render "li" }}
+          {{ end }}
+        </div>
+      </div>
+
+      {{ partial "pagination.html" . }}
+</div>
+{{ end }}

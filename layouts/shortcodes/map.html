@@ -1,0 +1,40 @@
+{{ $id := $.Page.UniqueID }}
+<div class="map-container">
+  <div class="map" id="{{ $id }}">
+  </div>
+  <script>
+    (function() {
+      var maxZoom = {{ .Get "maxZoom" | int }};
+      var img = [
+        {{ .Get "width" | int }},
+        {{ .Get "height" | int }}
+      ];
+      var pos = '{{ .Get "pos" | default "0,0"}}'.split(',');
+      var map = L.map('{{ $id }}', {
+        minZoom: 0,
+        maxZoom: maxZoom,
+        scrollWheelZoom: false,
+        fullscreenControl: {
+          pseudoFullscreen: true
+        }
+      });
+      var rc = new L.RasterCoords(map, img);
+
+      map.setView(rc.unproject(pos), 4);
+
+      L.tileLayer('//maps.ninjs.org/{{ .Get "name" }}/tiles/{z}/{x}/{y}.png', {
+        noWrap: true,
+        attribution: 'Карта Кенигсберга и окрестностей. 1928г.',
+        maxZoom: maxZoom,
+      }).addTo(map);
+      map.on('fullscreenchange', function () {
+        if (map.isFullscreen()) {
+          map.scrollWheelZoom.addHooks();
+        } else {
+          map.scrollWheelZoom.removeHooks();
+        }
+      });
+
+    })();
+  </script>
+</div>

@@ -1,0 +1,23 @@
+<article class="li">
+  <a href="{{ .Permalink }}">
+    {{ if isset .Params "thumbnail" }}
+    <div class="thumb" style="background-image: url({{ .URL | safeCSS }}{{ .Params.thumbnail | safeCSS }})"></div>
+    {{ else }}
+    <div class="thumb"></div>
+    {{ end }}
+
+    <div class="inner">
+      <h2 class="title">{{ .Title }}</h2>
+
+      <ul class="facts">
+        <li><i class="fa fa-calendar" aria-hidden="true"></i>
+          {{ partial "lastmod" . }}
+        </li>
+        <li>{{ i18n "wordCount" .WordCount }}</li>
+        {{ if eq (getenv "HUGO_ENV") "DEV" }}
+        {{ if .IsDraft }}<li style="color: #2196f3;">DRAFT</li>{{ end }}
+        {{ end }}
+      </ul>
+    </div>
+  </a>
+</article>

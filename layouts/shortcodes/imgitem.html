@@ -1,0 +1,29 @@
+<figure
+    {{if .Get "width" }}
+    style="width: {{ .Get "width" |safeCSS }};"
+    {{end}}
+    {{if .Get "hidden" }}
+      class="img-item__hidden"
+    {{end}}
+    itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+  {{ $img := (imageConfig (printf "content/%s/%s" $.Page.File.Dir (.Get "src"))) }}
+  <a href="{{ .Get "src" }}" itemprop="contentUrl" data-size="{{ $img.Width }}x{{ $img.Height }}">
+    <img
+        src="{{ .Get "src" | replaceRE "\\/([^/]+)$" "/th/$1" }}"
+        itemprop="thumbnail" alt="{{ .Parent.Get "alt" | default "" }}"
+    />
+  </a>
+
+  <!-- optionally use this method to store image dimensions for PhotoSwipe -->
+  <meta itemprop="width" content="{{ $img.Width }}">
+  <meta itemprop="height" content="{{ $img.Height }}">
+
+
+  <figcaption itemprop="caption description">
+    {{ if .Get "href" }}
+    <a href="{{ .Get "href" }}" target="_blank">{{ .Get "caption" }}</a>
+    {{ else }}
+    {{ .Get "caption" }}
+    {{ end }}
+  </figcaption>
+</figure>

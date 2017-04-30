@@ -1,0 +1,52 @@
+<article class="sn">
+
+  {{ if isset .Params "thumbnail" }}
+    <div class="thumb" style="background-image: url({{ .URL | safeCSS }}{{ .Params.thumbnail | safeCSS }})"></div>
+  {{ else }}
+    <div class="thumb"></div>
+  {{ end }}
+
+  <header class="article-header">
+    <h1 class="title">{{ .Title }}</h1>
+
+    <ul class="facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i>
+        {{ partial "lastmod" . }}
+      </li>
+
+      <li>{{ i18n "wordCount" .WordCount }}</li>
+      {{ if eq (getenv "HUGO_ENV") "DEV" }}
+      {{ if .IsDraft }}<li style="color: #2196f3;">DRAFT</li>{{ end }}
+      {{ end }}
+    </ul>
+  </header>
+
+  {{ if .Params.toc }}
+  <div class="toc">
+    {{ .TableOfContents }}
+  </div>
+  {{ end }}
+
+  <div class="article-body">{{ .Content }}</div>
+
+  {{ $params := .Params }}
+  {{ range $key, $value := $.Site.Taxonomies }}
+  {{ if isset $params $key }}
+  <footer class="article-footer">
+    <section class="footer">
+      <header>
+        <a href="{{ $.Site.BaseURL }}{{ $key | urlize }}/">{{ $key | upper }}</a>
+      </header>
+      <div>
+        <ul class="terms">
+          {{ range (index $params $key) }}
+          <li><a href="{{ $.Site.BaseURL }}{{ $key | urlize }}/{{ . | urlize }}/">{{ . }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+    </section>
+  </footer>
+  {{ end }}
+  {{ end }}
+
+</article>

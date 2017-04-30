@@ -1,0 +1,31 @@
+{
+  "name": "anru.github.io",
+  "version": "1.0.0",
+  "description": "anru blog",
+  "main": "index.js",
+  "repository": "git@github.com:anru/anru.github.io.git",
+  "author": "Andrey Rublev <version.ru@gmail.com>",
+  "license": "private",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^3.0.0",
+    "image-size": "^0.6.1",
+    "leaflet": "^1.1.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "yargs": "^8.0.2"
+  },
+  "cssnano": {
+    "preset": [
+      "default",
+      {
+        "discardComments": {
+          "removeAll": true
+        }
+      }
+    ]
+  }
+}

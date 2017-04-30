@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{ partial "meta.html" . }}
+    <script
+        src="//code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    {{ with .Site.Params.googlefonts }}
+    <link href="{{ . }}" rel="stylesheet" />
+    {{ end }}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+    <title>{{ block "title" . }}{{ end }}{{ .Site.Title }}</title>
+    {{ block "meta" . }}{{ end }}
+  </head>
+
+  <body>
+    {{ if ne (getenv "HUGO_ENV") "DEV" }}
+    {{ template "_internal/google_analytics.html" . }}
+    {{ end }}
+
+    <header class="l-header {{ if .Page.IsPage }}_page{{ end}}">
+      <div class="logo">
+        <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+      </div>
+    </header>
+
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="l-footer">
+      <div class="l-container">
+        <ul class="contact-list">
+          <li><a href="mailto:box@anru.me">box@anru.me</a></li>
+          <li><a href="https://t.me/anrume">telegram</a></li>
+          <li><a href="https://twitter.com/anrublev">twitter</a></li>
+          <li><a href="https://github.com/anru">github</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    {{ block "photoswipe" . }}
+      <link rel="stylesheet" href="/photoswipe/photoswipe.css">
+      <link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+      {{ partial "photoswipe" . }}
+
+      <script type="text/javascript" src="/photoswipe/bundle.js"></script>
+    {{ end }}
+
+    {{ block "metrika" . }}
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+          try {
+            w.yaCounter46541817 = new Ya.Metrika({
+              id:46541817,
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true
+            });
+          } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+          s = d.createElement("script"),
+          f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+          d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/46541817" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    {{ end }}
+  </body>
+</html>
+

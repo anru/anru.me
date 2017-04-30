@@ -1,0 +1,16 @@
+DefaultContentLanguage = "ru"
+baseURL = "http://anru.me/"
+languageCode = "ru"
+title = "Андрей Рублев"
+
+[params]
+  dateformat = "30 January 2006" # Optional
+  # Fonts settings.
+  googlefonts = "https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&amp;subset=cyrillic"
+
+
+[outputs]
+  page = [ "HTML" ] # if you want AMP enable.
+
+
+
