@@ -1,4 +1,6 @@
 .DS_Store
 /themes/
-/static/photoswipe
+/static/photoswipe/**/*.css
+/static/photoswipe/**/*.js
 /static/css/app.css
+/.tup

@@ -1,0 +1,11 @@
+include_rules
+
+psjs := src/photoswipe/photoswipe.js src/photoswipe/photoswipe-ui-default.js src/photoswipe/init.js
+
+# photoswipe
+:  $(psjs) |> !bundle_js |> static/photoswipe/bundle.js
+: foreach src/photoswipe/*.css |> !bundle_css |> static/photoswipe/%b
+: foreach src/photoswipe/default-skin/*.css |> !bundle_css |> static/photoswipe/default-skin/%b
+
+# app.css
+: src/css/*.css |> !bundle_css |> static/css/app.css

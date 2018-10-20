@@ -1,0 +1,2 @@
+!bundle_js = |> cat %f | node_modules/.bin/terser -c > %o |>
+!bundle_css = |> cat %f | node_modules/.bin/csso -o %o |>
